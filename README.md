@@ -14,14 +14,8 @@ How to start the project?
 2. Click on "Code" and in dropdown menu copy the SSH link
 3. Open up git bash
 4. Now insert the following code:
-5. cd source
-6. cd repos
-7. cd TARpe20
-8. git clone "paste link here"
-9. Open "Hajusrakendused" folder
-10. Hold down shif, press right click and open Powershell
-11. In Powershell insert the following code
-12. npm start
-13. In the folder open index.html
-14. Done
-
+5. git clone "SSH link"
+6. cd Hajusrakendused
+7. npm i
+8. npm start
+9. To see the cars api documentation open index.html and type in the serach bar localhost:3000/docs.
