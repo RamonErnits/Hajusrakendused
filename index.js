@@ -12,6 +12,10 @@ const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET
 const carmodel = require('./Models/CarModel');
 const bodyParser = require("body-parser");
+const express = require('express');
+
+
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/carsApiDb")
@@ -24,6 +28,8 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+
+app.use(express.static(__dirname + '/css'));
 
 require("./routes/routes")(app);
 
@@ -87,6 +93,9 @@ async function seedDB() {
 
 seedDB();
 
+// set up engine
+
+app.set('view engine', 'ejs');
 
 
 app.post("/login", async (req, res, next) => {
@@ -166,7 +175,10 @@ app.post("/login", async (req, res, next) => {
     });
   });
   
-  
+  // get index page 
+ 
+
+
   app.get('/accessResource', (req, res)=>{  
       
       const token2 = req.headers.authorization

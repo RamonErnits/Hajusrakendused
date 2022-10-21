@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="locations.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>locations</title>
+  
+</head>
+<body>
+
+  <div class="navbar">
+    
+    <div class="info">
+        <a class="active" href="index">Cars List</a>
+        <a href="sellers">Sellers</a>
+        <a href="locations">Locations</a>
+    </div>
+</div>
+  
+    <div id="app">
+    <table id="carsTable" class="carsShow table-bordered table-hover ">
+        <tr>
+            <th>Car Location</th>
+        </tr>
+        <tr v-for="car in cars">
+            <td @click="getcar(car._id)" class="location">{{car.location}}</td>
+        </tr>
+    </table>
+    
+
+<div class="modal fade modal-sm " id="carInfoModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="carInfoModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title">locations<h5>
+        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table>
+        <tr>
+            <th>id</th>
+            <td>{{carInModal.id}}</td>
+        </tr>
+        <tr>
+            <th>brand</th>
+            <td>{{carInModal.brand}}</td>
+        </tr>
+        <tr>
+            <th>price</th>
+            <td>{{carInModal.price}}</td>
+        </tr>
+        <tr>
+            <th>seller</th>
+            <td>{{carInModal.seller}}</td>
+        </tr>
+        <tr>
+            <th>location</th>
+            <td>{{carInModal.location}}</td>
+        </tr>
+    </table>
+    <button type="button bg-dark" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+
+      
+    </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+ 
+      
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+<script type="module">
+  import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+  createApp({
+    data() {
+      return {
+        carInModal:{},
+        cars:[]
+      }
+    },
+      async created(){
+          this.cars= await (await fetch('http://localhost:3000/cars')).json();
+      
+    },
+    methods: {
+        getcar: async function (id) {
+            this.carInModal = await (await fetch (`http://localhost:3000/cars/${id}`)).json()
+            console.log(this.carInModal);
+            const  carInfoModal = new bootstrap.Modal(document.getElementById('carInfoModal'),{})
+            carInfoModal.show()
+        }
+    }
+  }).mount('#app')
+</script>
+
+</script>
+</body>
+</html>
