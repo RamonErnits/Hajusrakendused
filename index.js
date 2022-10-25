@@ -28,8 +28,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
-app.use(express.static(__dirname + '/css'));
+app.use(express.static('public'))
+// app.use(express.static(__dirname));
+// app.use(express.static(__dirname + "/" + "css" + "/"));
+// app.use(express.static(__dirname + "/" + "css"));
 
 require("./routes/routes")(app);
 
@@ -62,7 +64,7 @@ async function seedDB() {
         // make a bunch of time series data
         let timeSeriesData = [];
 
-        for (let i = 0; i < 5000; i++) {
+        for (let i = 0; i < 15; i++) {
             const brand = faker.vehicle.vehicle();
             const price = faker.finance.amount(25, 100, 2,);
             const seller = faker.name.fullName();
@@ -255,6 +257,7 @@ app.post('/car', (req, res) => {
     res.end();
 });
 */
+
 
 // make seeding data
 app.get('/seed', (req, res) => {

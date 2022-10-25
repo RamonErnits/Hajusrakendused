@@ -1,5 +1,6 @@
 const car = require('../Controllers/CarController');
 const mainController = require("../controllers/mainController");
+const adminController = require("../controllers/adminController");
 const User = require('../Models/userModel');
 
 module.exports = function(app) {
@@ -23,6 +24,18 @@ module.exports = function(app) {
 
     app.route('/index')
     .get(mainController.getIndexPage);
+
+    app.route('/admin')
+    .get(adminController.getAdminPage);
+
+    app.route('/admin/accounts')
+    .get(adminController.getAccountsPage);
+
+    app.route('/admin/tasks')
+    .get(adminController.getTasksPage);
+
+    app.route('/admin/customers')
+    .get(adminController.getCustomersPage);
 
     app.route('/sellers')
     .get(mainController.getSellersPage);

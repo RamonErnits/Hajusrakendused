@@ -1,0 +1,348 @@
+  .container {
+    display: block;
+    width: 400px;
+    margin: 100px auto 0;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  li * {
+    float: left;
+  }
+  li, h3 {
+    clear:both;
+    list-style:none;
+  }
+  input, button {
+    outline: none;
+  }
+  button {
+    background: none;
+    border: 0px;
+    color: #888;
+    font-size: 15px;
+    width: 60px;
+    margin: 10px 0 0;
+    font-family: Lato, sans-serif;
+    cursor: pointer;
+  }
+  button:hover {
+    color: #333;
+  }
+  /* Heading */
+  h3,
+  label[for='new-task'] {
+    color: #333;
+    font-weight: 700;
+    font-size: 15px;
+    border-bottom: 2px solid #333;
+    padding: 30px 0 10px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  input[type="text"] {
+    margin: 0;
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
+    font-family: Lato, sans-serif;
+    color: #888;
+  }
+  input[type="text"]:focus {
+    color: #333;
+  }
+  
+  /* New Task */
+  label[for='new-task'] {
+    display: block;
+    margin: 0 0 20px;
+  }
+  input#new-task {
+    float: left;
+    width: 318px;
+  }
+  p > button:hover {
+    color: #0FC57C;
+  }
+  
+  /* Task list */
+  li {
+    overflow: hidden;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+  }
+  li > input[type="checkbox"] {
+    margin: 0 10px;
+    position: relative;
+    top: 15px;
+  }
+  li > label {
+    font-size: 18px;
+    line-height: 40px;
+    width: 237px;
+    padding: 0 0 0 11px;
+  }
+  li >  input[type="text"] {
+    width: 226px;
+  }
+  li > .delete:hover {
+    color: #CF2323;
+  }
+  
+  /* Completed */
+  #completed-tasks label {
+    text-decoration: line-through;
+    color: #888;
+  }
+  
+  /* Edit Task */
+  ul li input[type=text] {
+    display:none;
+  }
+  
+  ul li.editMode input[type=text] {
+    display:block;
+  }
+  
+  ul li.editMode label {
+    display:none;
+  }
+
+  body{
+    margin:0px;
+    padding: 0px;
+    background-color:#1b203d;
+    overflow: hidden;
+    font-family: system-ui;
+  }
+  .clearfix{
+    clear: both;
+  }
+  .logo{
+    margin: 0px;
+    margin-left: 10px;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 30px;
+  }
+  .logo span{
+    color: #f7403b;
+  }
+  
+  .pagename{
+    margin: 0px;
+    margin-left: 10px;
+      font-size: 20px;
+      color: white;
+      margin-bottom: 30px;
+  }
+  
+  .modal-content{
+      margin: 50px; 
+  }
+  
+  .btn {
+      background-color: rgb(255, 255, 255);
+      margin-left :80%;
+      margin-top: 7px;
+  }
+  
+  .sidenav {
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #272c4a;
+    overflow: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+  }
+  .sidenav a {
+    padding: 15px 8px 15px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  .sidenav a:hover {
+    color: #f1f1f1;
+    background-color:#1b203d;
+  }
+  .sidenav{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    margin-left: 300px;
+  }
+  .head{
+    padding:20px;
+  }
+  .col-div-6{
+    width: 50%;
+    float: left;
+  }
+  .profile{
+    display: inline-block;
+    float: right;
+    width: 160px;
+  }
+  .pro-img{
+    float: left;
+    width: 40px;
+    margin-top: 5px;
+  }
+  .profile p{
+    color: white;
+    font-weight: 500;
+    margin-left: 55px;
+    margin-top: 10px;
+    font-size: 13.5px;
+  }
+  .profile p span{
+    font-weight: 400;
+      font-size: 12px;
+      display: block;
+      color: #8e8b8b;
+  }
+  .col-div-3{
+    width: 25%;
+    float: left;
+  }
+  .box{
+    width: 85%;
+    height: 100px;
+    background-color: #272c4a;
+    margin-left: 10px;
+    padding:10px;
+  }
+  .box p{
+     font-size: 35px;
+      color: white;
+      font-weight: bold;
+      line-height: 30px;
+      padding-left: 10px;
+      margin-top: 20px;
+      display: inline-block;
+  }
+  .box p span{
+    font-size: 20px;
+    font-weight: 400;
+    color: #818181;
+  }
+  .box-icon{
+    font-size: 40px!important;
+      float: right;
+      margin-top: 35px!important;
+      color: #818181;
+      padding-right: 10px;
+  }
+  .col-div-8{
+    width: 70%;
+    float: left;
+  }
+  .col-div-4{
+    width: 30%;
+    float: left;
+  }
+  .content-box{
+    padding: 20px;
+  }
+  .content-box p{
+    margin: 0px;
+      font-size: 20px;
+      color: #f7403b;
+  }
+  .content-box p span{
+    float: right;
+      background-color: #ddd;
+      padding: 3px 10px;
+      font-size: 15px;
+  }
+  .box-8, .box-4{
+    width: 95%;
+    background-color: #272c4a;
+    height: 330px;
+    
+  }
+  .nav2{
+    display: none;
+  }
+  
+  .box-8{
+    margin-left: 10px;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    
+  }
+  td, th {
+    text-align: left;
+    padding:15px;
+    color: #ddd;
+    border-bottom: 1px solid #81818140;
+  }
+  .circle-wrap {
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+    background: #e6e2e7;
+    border-radius: 50%;
+  }
+  .circle-wrap .circle .mask,
+  .circle-wrap .circle .fill {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    border-radius: 50%;
+  }
+  .circle-wrap .circle .mask {
+    clip: rect(0px, 150px, 150px, 75px);
+  }
+  
+  .circle-wrap .circle .mask .fill {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #f7403b;
+  }
+  .circle-wrap .circle .mask.full,
+  .circle-wrap .circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(126deg);
+  }
+  
+  @keyframes fill {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(126deg);
+    }
+  }
+  .circle-wrap .inside-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #fff;
+    line-height: 130px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+  }

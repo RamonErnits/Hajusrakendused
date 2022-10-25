@@ -1,0 +1,267 @@
+<!Doctype HTML>
+	<html>
+	<head>
+		<title></title>
+		
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/tasks.css"/>
+	</head>
+
+
+	<body>
+		
+		<div id="mySidenav" class="sidenav">
+		<p class="logo"><span>Car</span>-Ads <p class="pagename">Admin</p></p>
+	  <a href="/admin" class="icon-a"><i class="fa fa-dashboard icons"></i>   Dashboard</a>
+	  <a href="/admin/customers"class="icon-a"><i class="fa fa-users icons"></i>   Customers</a>
+	  <a href=""class="icon-a"><i class="fa fa-shopping-bag icons"></i>   Orders</a>
+	  <a href=""class="icon-a"><i class="fa fa-tasks icons"></i>   Inventory</a>
+	  <a href="/admin/accounts"class="icon-a"><i class="fa fa-user icons"></i>   Accounts</a>
+	  <a href=""class="icon-a"><i class="fa fa-list-alt icons"></i>   Tasks</a>
+
+	</div>
+	<div id="main">
+
+		<div class="head">
+			<div class="col-div-6">
+	<span style="font-size:30px;cursor:pointer; color: white;" class="nav"  >☰ Dashboard</span>
+	<span style="font-size:30px;cursor:pointer; color: white;" class="nav2"  >☰ Dashboard</span>
+	</div>
+		
+		<div class="col-div-6">
+		<div class="profile">
+
+			<img src="/images/profile.jpg" class="pro-img" />
+			<p>Welcome, User!<span>Admin</span></p>
+		</div>
+	</div>
+		<div class="clearfix"></div>
+	</div>
+
+		<div class="clearfix"></div>
+		<br/>
+		
+		
+            <div class="container">
+              <p>
+                <label for="new-task">Add Item</label><input id="new-task" type="text"><button>Add</button>
+              </p>
+              
+              <h3>Todo</h3>
+              <ul id="incomplete-tasks">
+                
+              </ul>
+              
+              <h3>Completed</h3>
+              <ul id="completed-tasks">
+              </ul>
+            </div>
+        
+            <script type="text/javascript" src="app.js"></script>
+        
+
+    
+              
+            </div>
+            </div>
+          </div>
+        </div>
+	</div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+
+	  $(".nav").click(function(){
+	    $("#mySidenav").css('width','70px');
+	    $("#main").css('margin-left','70px');
+	    $(".logo").css('visibility', 'hidden');
+	    $(".logo span").css('visibility', 'visible');
+	     $(".logo span").css('margin-left', '-10px');
+	     $(".icon-a").css('visibility', 'hidden');
+	     $(".icons").css('visibility', 'visible');
+	     $(".icons").css('margin-left', '-8px');
+	      $(".nav").css('display','none');
+	      $(".nav2").css('display','block');
+	  });
+
+	$(".nav2").click(function(){
+	    $("#mySidenav").css('width','300px');
+	    $("#main").css('margin-left','300px');
+	    $(".logo").css('visibility', 'visible');
+	     $(".icon-a").css('visibility', 'visible');
+	     $(".icons").css('visibility', 'visible');
+	     $(".nav").css('display','block');
+	      $(".nav2").css('display','none');
+	 });
+
+	</script>
+
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+<script>
+
+var taskInput=document.getElementById("new-task");//Add a new task.
+var addButton=document.getElementsByTagName("button")[0];//first button
+var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
+var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+
+//New task list item
+var createNewTaskElement=function(taskString){
+
+	var listItem=document.createElement("li");
+
+	//input (checkbox)
+	var checkBox=document.createElement("input");//checkbx
+	//label
+	var label=document.createElement("label");//label
+	//input (text)
+	var editInput=document.createElement("input");//text
+	//button.edit
+	var editButton=document.createElement("button");//edit button
+
+	//button.delete
+	var deleteButton=document.createElement("button");//delete button
+
+	label.innerText=taskString;
+
+	//Each elements, needs appending
+	checkBox.type="checkbox";
+	editInput.type="text";
+
+	editButton.innerText="Edit";//innerText encodes special characters, HTML does not.
+	editButton.className="edit";
+	deleteButton.innerText="Delete";
+	deleteButton.className="delete";
+
+	//and appending.
+	listItem.appendChild(checkBox);
+	listItem.appendChild(label);
+	listItem.appendChild(editInput);
+	listItem.appendChild(editButton);
+	listItem.appendChild(deleteButton);
+	return listItem;
+}
+
+var addTask=function(){
+	console.log("Add Task...");
+	//Create a new list item with the text from the #new-task:
+	var listItem=createNewTaskElement(taskInput.value);
+
+	//Append listItem to incompleteTaskHolder
+	incompleteTaskHolder.appendChild(listItem);
+	bindTaskEvents(listItem, taskCompleted);
+
+	taskInput.value="";
+
+}
+
+//Edit an existing task.
+
+var editTask=function(){
+console.log("Edit Task...");
+console.log("Change 'edit' to 'save'");
+
+
+var listItem=this.parentNode;
+
+var editInput=listItem.querySelector('input[type=text]');
+var label=listItem.querySelector("label");
+var containsClass=listItem.classList.contains("editMode");
+		//If class of the parent is .editmode
+		if(containsClass){
+
+		//switch to .editmode
+		//label becomes the inputs value.
+			label.innerText=editInput.value;
+		}else{
+			editInput.value=label.innerText;
+		}
+
+		//toggle .editmode on the parent.
+		listItem.classList.toggle("editMode");
+}
+
+//Delete task.
+var deleteTask=function(){
+		console.log("Delete Task...");
+
+		var listItem=this.parentNode;
+		var ul=listItem.parentNode;
+		//Remove the parent list item from the ul.
+		ul.removeChild(listItem);
+
+}
+
+//Mark task completed
+var taskCompleted=function(){
+		console.log("Complete Task...");
+	
+	//Append the task list item to the #completed-tasks
+	var listItem=this.parentNode;
+	completedTasksHolder.appendChild(listItem);
+				bindTaskEvents(listItem, taskIncomplete);
+
+}
+
+
+var taskIncomplete=function(){
+		console.log("Incomplete Task...");
+//Mark task as incomplete.
+	//When the checkbox is unchecked
+		//Append the task list item to the #incomplete-tasks.
+		var listItem=this.parentNode;
+	incompleteTaskHolder.appendChild(listItem);
+			bindTaskEvents(listItem,taskCompleted);
+}
+
+var ajaxRequest=function(){
+	console.log("AJAX Request");
+}
+
+//The glue to hold it all together.
+
+
+//Set the click handler to the addTask function.
+addButton.onclick=addTask;
+addButton.addEventListener("click",addTask);
+addButton.addEventListener("click",ajaxRequest);
+
+var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
+	console.log("bind list item events");
+//select ListItems children
+	var checkBox=taskListItem.querySelector("input[type=checkbox]");
+	var editButton=taskListItem.querySelector("button.edit");
+	var deleteButton=taskListItem.querySelector("button.delete");
+
+			//Bind editTask to edit button.
+			editButton.onclick=editTask;
+			//Bind deleteTask to delete button.
+			deleteButton.onclick=deleteTask;
+			//Bind taskCompleted to checkBoxEventHandler.
+			checkBox.onchange=checkBoxEventHandler;
+}
+
+//cycle over incompleteTaskHolder ul list items
+	//for each list item
+	for (var i=0; i<incompleteTaskHolder.children.length;i++){
+
+		//bind events to list items chldren(tasksCompleted)
+		bindTaskEvents(incompleteTaskHolder.children[i],taskCompleted);
+	}
+
+//cycle over completedTasksHolder ul list items
+	for (var i=0; i<completedTasksHolder.children.length;i++){
+	//bind events to list items chldren(tasksIncompleted)
+		bindTaskEvents(completedTasksHolder.children[i],taskIncomplete);
+	}
+
+</script>
+
+	</body>
+
+
+	</html>

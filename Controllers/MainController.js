@@ -68,8 +68,10 @@ exports.postLogin = async (req, res, next) => {
   
 
   if (!existingUser || !await bcrypt.compare(req.body.password,existingUser.password)) {
-    const error = Error("Wrong details please check at once");
+    
+    const error = Error("Wrong details please check at once");  
     return res.status(400).json(next(error))
+
   }
   
   let token;
@@ -105,6 +107,7 @@ exports.postRegister = async (req, res, next) => {
         await newUser.save();
       } catch (err){
         res.status(401).json(next(err))
+        
        
       }
       let token;
@@ -127,7 +130,7 @@ exports.postRegister = async (req, res, next) => {
 
 
 exports.getLogout = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
+  res.cookie('jwt', '', { maxAge: 0 });
   res.redirect('login');
 }
 
