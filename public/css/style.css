@@ -36,11 +36,41 @@ a{
   background-color: #bc986a;
 }
 
+.admin{
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  
+  display: block;
+
+  padding: 5px;
+  
+  background-color: #bc986a;
+
+  border: 1px solid #bc986a;
+  
+  border-radius: 5px;
+  
+  color: #f2f2f2;
+  
+  text-decoration: none;
+  
+  font-size: 17px;
+  
+
+  
+  text-align: center;
+ 
+  z-index: 100;
+  
+}
+
 .logout{
   float: right;
   /* move button to the top right corner, add some space and disable outlines */
   position: absolute;
-  top: 20px;
+  top: 10px;
   right: 10px;
   outline: none;
   /* remove default button styles */
@@ -49,7 +79,7 @@ a{
   /* set font styles */
   font-family: sans-serif;
   color: #fff;
-  text-transform: uppercase;
+
   cursor: pointer;
   padding: 5px;
   font-size: 14px;

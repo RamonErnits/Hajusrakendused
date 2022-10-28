@@ -4,15 +4,14 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET
 const bodyParser = require('body-parser');
-const User = require("../Models/userModel");
+const Admin = require("../Models/adminModel");
 const { request } = require('express');
 const app = express();
 
 
 
-app.use(express.static('public'));
 
-
+// Exports -------------------------------------------------------
 
 exports.getAdminPage = (req, res) => {
     res.render('admin'); 
@@ -29,3 +28,10 @@ exports.getTasksPage = (req, res) => {
 exports.getCustomersPage = (req, res) => {
     res.render('customers');
 };
+
+exports.getIndexAdminPage = (req, res) => {
+    res.render('indexAdmin'); 
+};
+
+
+

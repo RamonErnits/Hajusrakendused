@@ -8,18 +8,19 @@ const mongoose = require("mongoose");
 require ('dotenv').config();
 const jwt = require("jsonwebtoken");
 const User = require("./Models/userModel");
+const Admin = require("./Models/adminModel");
 const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET
 const carmodel = require('./Models/CarModel');
 const bodyParser = require("body-parser");
 const express = require('express');
 
-
+const cookieParser = require('cookie-parser')
 
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/carsApiDb")
-
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
@@ -123,7 +124,7 @@ app.post("/login", async (req, res, next) => {
     try {
       //Creating jwt token
       token = jwt.sign(
-        { userId: existingUser.id, email: existingUser.email },
+        { userId: existingUser.id, email: existingUser.email, role: existingUser.role },
         JWT_SECRET,
         { expiresIn: "1h" }
       );
@@ -138,6 +139,49 @@ app.post("/login", async (req, res, next) => {
       data: {
         userId: existingUser.id,
         email: existingUser.email,
+        token: token,
+      },
+    });
+  });
+
+  app.post("/login/admin", async (req, res, next) => {
+   
+    let { email, password } = req.body;
+    
+    let existingAdmin;
+    
+    try {
+      existingAdmin = await Admin.findOne({ email: email });
+    } catch {
+       return res.status(400).json((err))
+    }
+    
+  
+    if (!existingAdmin || !await bcrypt.compare(req.body.password,existingAdmin.password)) {
+      const error = Error("Wrong details please check at once");
+      return res.status(400).json(next(error))
+    }
+    
+    let token;
+    
+    try {
+      //Creating jwt token
+      token = jwt.sign(
+        { adminId: existingAdmin.id, email: existingAdmin.email, role: existingAdmin.role },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+    } catch (err) {
+      console.log(err);
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
+    }
+    console.log(token);
+    res.status(200).json({
+      success: true,
+      data: {
+        adminId: existingAdmin.id,
+        email: existingAdmin.email,
         token: token,
       },
     });
@@ -162,7 +206,7 @@ app.post("/login", async (req, res, next) => {
   
     try {
       token = jwt.sign(
-        { userId: newUser.id, email: newUser.email },
+        { userId: newUser.id, email: newUser.email, role: newUser.role },
         JWT_SECRET,
         { expiresIn: "1h" }
       );
@@ -173,7 +217,41 @@ app.post("/login", async (req, res, next) => {
     }
     res.status(201).json({
       success: true,
-      data: { userId: newUser.id, email: newUser.email, token: token },
+      data: { userId: newUser.id, email: newUser.email, role: newUser.role, token: token },
+    });
+  });
+
+  app.post("/signup/admin", async (req, res, next) => {
+    const { name, email, password } = req.body;
+    const newAdmin = Admin({
+      name,
+      email,
+      password,
+      role,
+    });
+  
+    try {
+      await newAdmin.save();
+    } catch (err){
+      res.status(401).json(next(err))
+     
+    }
+    let token;
+  
+    try {
+      token = jwt.sign(
+        { adminId: newAdmin.id, email: newAdmin.email },
+        JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+    } catch (err) {   
+        console.log(JWT_SECRET);
+      const error = new Error("Error! Something went wrong.");
+      return next(error);
+    }
+    res.status(201).json({
+      success: true,
+      data: { adminId: newAdmin.id, email: newAdmin.email, token: token },
     });
   });
   

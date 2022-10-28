@@ -1,6 +1,8 @@
 const car = require('../Controllers/CarController');
 const mainController = require("../controllers/mainController");
 const adminController = require("../controllers/adminController");
+const loginController = require("../controllers/loginController");
+const registerController = require('../controllers/registerController');
 const User = require('../Models/userModel');
 
 module.exports = function(app) {
@@ -15,15 +17,20 @@ module.exports = function(app) {
 
 
     app.route('/register')
-    .get(mainController.getRegisterPage)
-    .post(mainController.postRegister);
- 
+    .get(registerController.getRegisterPage)
+    .post(registerController.postRegister);
+
+
     app.route('/login')
-    .get(mainController.getLoginPage)
-    .post(mainController.postLogin);
+    .get(loginController.getLoginPage)
+    .post(loginController.postLogin);
+
 
     app.route('/index')
     .get(mainController.getIndexPage);
+
+    app.route('/index/admin')
+    .get(adminController.getIndexAdminPage);
 
     app.route('/admin')
     .get(adminController.getAdminPage);
@@ -49,7 +56,6 @@ module.exports = function(app) {
     app.route('/myposts')
     .get(mainController.getMyPostsPage);
 
-    app.route('/logout')
-    .get(mainController.getLogout);
+
 
 }

@@ -2,7 +2,7 @@ const mongoose  = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-const userSchema = new Schema({
+const adminSchema = new Schema({
     name: {
         type: String,
         required: "Name is mandatory",
@@ -16,20 +16,13 @@ const userSchema = new Schema({
         type: String,
         required: "Password is mandatory",
     },
-    role:{
-        type: String,
-        enum: ['admin', 'user'],
-        default: 'user'
-    }
 });
 
-userSchema.pre('save', async function(next){
+adminSchema.pre('save', async function(next){
     const salt = await bcrypt.genSalt();
     this.password = await bcrypt.hash(this.password, salt)
     next();
 });
 
-
-
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const Admin = mongoose.model('Admin', adminSchema);
+module.exports = Admin;

@@ -27,6 +27,18 @@ body{
     margin-bottom: 30px;
 }
 
+.loginadmin{
+  color: black;
+  /* move button to the right below the table, add some space and disable outlines */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  outline: none;
+  /* remove default button styles */
+  border: none;
+  background: none;
+  
+}
 .sidenav {
   height: 100%;
   width: 300px;
