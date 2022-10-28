@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET
 const bodyParser = require('body-parser');
-const Admin = require("../Models/adminModel");
+
 const { request } = require('express');
 const app = express();
 

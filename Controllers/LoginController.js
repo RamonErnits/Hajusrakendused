@@ -33,7 +33,7 @@ exports.postLogin = async (req, res, next) => {
   }
   
   let token;
-  
+
   try {
     //Creating jwt token
     token = jwt.sign(
@@ -46,7 +46,18 @@ exports.postLogin = async (req, res, next) => {
     const error = new Error("Error! Something went wrong.");
     return next(error);
   }
- 
-    console.log(token);
-    res.redirect('index')
-    };
+  
+  res.status(200).json({
+    success: true,
+    data: {
+      userId: existingUser.id,
+      email: existingUser.email,
+      role: existingUser.role,
+      token: token,
+    },
+  });
+  
+
+  console.log(token);
+};
+
