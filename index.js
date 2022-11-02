@@ -103,7 +103,7 @@ app.set('view engine', 'ejs');
 
 app.post("/login", async (req, res, next) => {
    
-    let { email, password } = req.body;
+    let { role, email, password } = req.body;
     
     let existingUser;
     
@@ -126,65 +126,25 @@ app.post("/login", async (req, res, next) => {
       token = jwt.sign(
         { userId: existingUser.id, email: existingUser.email, role: existingUser.role },
         JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "2 days" }
       );
     } catch (err) {
       console.log(err);
       const error = new Error("Error! Something went wrong.");
       return next(error);
     }
-    console.log(token);
-    res.status(200).json({
+    
+    res.status(200)
+    .json({
       success: true,
       data: {
+        role: existingUser.role,
         userId: existingUser.id,
         email: existingUser.email,
         token: token,
       },
     });
-  });
-
-  app.post("/login/admin", async (req, res, next) => {
-   
-    let { email, password } = req.body;
-    
-    let existingAdmin;
-    
-    try {
-      existingAdmin = await Admin.findOne({ email: email });
-    } catch {
-       return res.status(400).json((err))
-    }
-    
-  
-    if (!existingAdmin || !await bcrypt.compare(req.body.password,existingAdmin.password)) {
-      const error = Error("Wrong details please check at once");
-      return res.status(400).json(next(error))
-    }
-    
-    let token;
-    
-    try {
-      //Creating jwt token
-      token = jwt.sign(
-        { adminId: existingAdmin.id, email: existingAdmin.email, role: existingAdmin.role },
-        JWT_SECRET,
-        { expiresIn: "1h" }
-      );
-    } catch (err) {
-      console.log(err);
-      const error = new Error("Error! Something went wrong.");
-      return next(error);
-    }
     console.log(token);
-    res.status(200).json({
-      success: true,
-      data: {
-        adminId: existingAdmin.id,
-        email: existingAdmin.email,
-        token: token,
-      },
-    });
   });
   
   // Handling post request
@@ -292,7 +252,7 @@ app.post("/login", async (req, res, next) => {
       });
   
       res.status(200).json({success:true, data:{userId:decodedToken.userId,
-       email:decodedToken.email}});   
+       email:decodedToken.email}});
   }),
 
 /*

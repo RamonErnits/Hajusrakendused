@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -30,7 +31,12 @@ const CarSchema = new Schema({
     location : {
         type: String,
         required: "Car location is required"
+    },
+    color : {
+        type: String,
+        required: "Car color is required"
     }
+
 });
 
 

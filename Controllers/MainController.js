@@ -1,11 +1,10 @@
-
 require ('dotenv').config();
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
 const JWT_SECRET = process.env.JWT_SECRET
 const bodyParser = require('body-parser');
-const User = require("../Models/userModel");
+
 const { request } = require('express');
 const app = express();
 
@@ -16,9 +15,8 @@ exports.getIndexPage = (req, res) => {
   const token = req.cookies.jwt;
   console.log("token" + token);
   res.render('index');
+
 };
-
-
 
 exports.getPostPage = (req, res) => {
   res.render('post');
@@ -50,7 +48,7 @@ app.use(function(req, res, next) {
 
 exports.logout_get = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
-  res.redirect('/index');
+  res.redirect('/login');
 }
 
 

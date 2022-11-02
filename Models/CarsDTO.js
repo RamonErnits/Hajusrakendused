@@ -7,6 +7,7 @@ module.exports = class CarDTO {
     owner;
     seller;
     location;
+    color;
 
     constructor(data) {
         this.id = data.id;
@@ -17,6 +18,7 @@ module.exports = class CarDTO {
         this.owner = data.owner;
         this.seller = data.seller;
         this.location = data.location;
+        this.color = data.color;
     }
 }
 

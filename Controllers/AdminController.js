@@ -10,10 +10,9 @@ const app = express();
 
 
 
-
-// Exports -------------------------------------------------------
-
 exports.getAdminPage = (req, res) => {
+    const token = req.cookies.jwt;
+  console.log("token" + token);
     res.render('admin'); 
 };
   

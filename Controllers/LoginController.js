@@ -6,18 +6,21 @@ const JWT_SECRET = process.env.JWT_SECRET
 const bodyParser = require('body-parser');
 const User = require("../Models/userModel");
 const { request } = require('express');
+const { restart } = require('nodemon');
 const app = express();
+
 
 
 exports.getLoginPage = (req, res) => {
     res.render('login');
 };
+
 exports.postLogin = async (req, res, next) => { 
   
-  let { role, email, password } = req.body;
+  const { role, email, password } = req.body;
     
   let existingUser;
-  
+
   try {
     existingUser = await User.findOne({ email: email, role: role });
   } catch {
@@ -46,18 +49,23 @@ exports.postLogin = async (req, res, next) => {
     const error = new Error("Error! Something went wrong.");
     return next(error);
   }
-  
-  res.status(200).json({
-    success: true,
-    data: {
-      userId: existingUser.id,
-      email: existingUser.email,
-      role: existingUser.role,
-      token: token,
-    },
-  });
-  
 
-  console.log(token);
+ res.cookie('jwt', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 })
+
+  
+ 
+
+if(role === "admin"){
+  res.redirect('/admin');
+  const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role }, JWT_SECRET, { expiresIn: "2 days" });
+}
+
+
+if(role === "user"){
+  res.redirect('/index');
+  const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role }, JWT_SECRET, { expiresIn: "2 days" });
+}
+
+console.log(token);
+  
 };
-

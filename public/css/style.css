@@ -13,12 +13,42 @@
   width: 800px;
 }
 
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row{
+  display: flex;
+}
+
+.column{
+  display: flex;
+}
+.loginmodal-content{
+  margin: 50px;
+  width: 300px;
+}
 .modal-content{
   margin: 50px; 
 }
 
 .modal-body{
   background-color: rgba(82,82,82,255);
+}
+
+.Logged-in-text{
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
 }
 
 .info{

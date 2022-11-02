@@ -8,6 +8,6 @@ const router = express.Router();
    .get(mainController.logout_get)
 
 
-   app.get('/admin', checkAdmin, (req, res) => res.render('admin'));
+   app.get('/admin', requireAuth, (req, res) => res.render('admin'));
 
  }

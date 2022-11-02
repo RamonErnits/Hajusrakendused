@@ -17,7 +17,7 @@
 	  <a href=""class="icon-a"><i class="fa fa-tasks icons"></i>   Inventory</a>
 	  <a href="/admin/accounts"class="icon-a"><i class="fa fa-user icons"></i>   Accounts</a>
 	  <a href="/admin/tasks"class="icon-a"><i class="fa fa-list-alt icons"></i>   Tasks</a>
-    <a href="/index/admin"class="icon-a"><i class="fa fa-child icons"></i>   Home</a>
+    <a href="/index"class="icon-a"><i class="fa fa-child icons"></i>   Home</a>
 
 	</div>
 	<div id="main">
@@ -44,16 +44,16 @@
 		<div id="app">
             <table id="carsTable" class="carsShow table-bordered table-hover ">
                 <tr>
-                    <th>Car brand (15)</th>
-                    <th>Car price (15)</th>
-                    <th>Car Seller (15)</th>
-                    <th>Car Location (15)</th>
+                    <th>Car brand </th>
+                    <th>Car price </th>
+                    <th>Car Seller </th>
+                    <th>Car Location </th>
                 </tr>
                 <tr v-for="car in cars">
                     <td @click="getcar(car._id)" class="carname">{{car.brand}}</td>
-                    <td class="price ">{{car.price}}</td>
-                    <td class="seller">{{car.seller}}</td>
-                    <td class="location">{{car.location}}</td>
+                    <td id="price" class="price ">{{car.price}}</td>
+                    <td id="seller" class="seller">{{car.seller}}</td>
+                    <td id="location" class="location">{{car.location}}</td>
                 </tr>
             </table>
             
@@ -165,7 +165,19 @@
     }
   }).mount('#app')
 
-  
+  // display the nuber of rows in the table
+  var table = document.getElementById('carsTable'),rIndex;
+  for(var i = 1; i < table.rows.length; i++)
+  {
+    table.rows[i].cells[0].onclick = function()
+    {
+      rIndex = this.parentElement.rowIndex;
+      document.getElementById("carname").value = this.parentElement.cells[0].innerHTML;
+      document.getElementById("price").value = this.parentElement.cells[1].innerHTML;
+      document.getElementById("seller").value = this.parentElement.cells[2].innerHTML;
+      document.getElementById("location").value = this.parentElement.cells[3].innerHTML;
+    };
+  }
 
 </script>
 
