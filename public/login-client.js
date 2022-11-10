@@ -57,11 +57,11 @@ createApp({
             }
         },
         doLogOff: function() {
-            this.loginName=""
-            this.loginPass=""
-            this.loginError=""
+            // delete user cookies
             this.token = ""
             sessionStorage.removeItem("token")
+            this.$router.push("/index")
+
         }
     }
 }).mount('#app')

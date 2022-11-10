@@ -65,7 +65,6 @@ createApp({
             this.loginError=""
             this.token =""
             sessionStorage.removeItem("token")
-            window.location.href = "/index"
         }
     }
 }).mount('#app')

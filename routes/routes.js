@@ -29,7 +29,7 @@ module.exports = function(app) {
     app.route('/logout')
     .get(mainController.logout_get)
 
-    app.route('/index')
+    app.route('/index', checkUser)
     .get(mainController.getIndexPage);
 
     app.route('/index/admin')
