@@ -41,10 +41,10 @@
         </div>
 
         <p>Already a member? <a href="login">Sign in</a></p>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
 
   </div>
 
@@ -56,31 +56,6 @@
   integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-
-<script type="module">
-  import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-
-  createApp({
-    data() {
-      return {
-        carInModal: {},
-        cars: []
-      }
-    },
-    async created() {
-      this.cars = await (await fetch('http://localhost:3000/cars')).json();
-
-    },
-    methods: {
-      getcar: async function (id) {
-        this.carInModal = await (await fetch(`http://localhost:3000/cars/${id}`)).json()
-        console.log(this.carInModal);
-        const carInfoModal = new bootstrap.Modal(document.getElementById('carInfoModal'), {})
-        carInfoModal.show()
-      }
-    }
-  }).mount('#app')
-</script>
 
 </script>
 </body>

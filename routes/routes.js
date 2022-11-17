@@ -16,6 +16,13 @@ module.exports = function(app) {
         .put(car.editById)            //Update
         .delete(car.deleteById);      //Delete
 
+    app.route('/users')
+        .get(mainController.getAllUsers)    //Get Users
+
+    app.route('/users/:id')
+        .get(mainController.getUsersById)    //Get User by ID
+        .put(mainController.EditUser)       //Edit User
+        .delete(mainController.deleteUser); //Delete User
 
     app.route('/register')
     .get(registerController.getRegisterPage)
@@ -29,7 +36,7 @@ module.exports = function(app) {
     app.route('/logout')
     .get(mainController.logout_get)
 
-    app.route('/index', checkUser)
+    app.route('/index', requireAuth, checkUser)
     .get(mainController.getIndexPage);
 
     app.route('/index/admin')
@@ -58,6 +65,12 @@ module.exports = function(app) {
 
     app.route('/myposts')
     .get(mainController.getMyPostsPage);
+
+    app.route("/logout")
+    .get(mainController.logout_get)
+
+    
+    app.get('/admin', requireAuth, (req, res) => res.render('admin', { title:"AdminPage" }));
 
     // app.get('/admin', requireAuth, checkAdmin, (req, res) => res.render('admin'));
     // app.get('/index', requireAuth, checkUser, (req, res) => res.render('index'));

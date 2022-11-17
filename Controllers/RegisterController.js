@@ -46,6 +46,8 @@ exports.postRegister = async (req, res, next) => {
         return next(error);
     }
 
+    
+
     res.status(201).json({
         success: true,
         data: {
@@ -56,6 +58,6 @@ exports.postRegister = async (req, res, next) => {
         },
     });
 
+    
     res.redirect('/login')
-
 };

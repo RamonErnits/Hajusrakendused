@@ -16,14 +16,13 @@ const bodyParser = require("body-parser");
 const express = require('express');
 
 const cookieParser = require('cookie-parser')
-const expressLayouts = require('express-ejs-layouts');
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/carsApiDb")
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
-app.use(expressLayouts);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -316,7 +315,10 @@ app.get('/seed', (req, res) => {
     });
 });
 
-
+app.post('/users/delete/:id', async (req, res) => {
+  await User.deleteOne({_id: req.params.id})
+  return res.redirect('/admin/accounts')
+});
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
