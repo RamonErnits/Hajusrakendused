@@ -33,8 +33,7 @@ createApp({
         getUser: async function() {
             this.users = await (await fetch(`http://localhost:3000/users`)).json()
             console.log(this.users);
-          },
-          
+          },  
 
         getcar: async function (id) {
             this.carInModal = await (await fetch(`http://localhost:3000/cars/${id}`)).json()

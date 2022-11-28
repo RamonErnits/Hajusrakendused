@@ -46,18 +46,8 @@ exports.postRegister = async (req, res, next) => {
         return next(error);
     }
 
-    
 
-    res.status(201).json({
-        success: true,
-        data: {
-            userID: newUser.id,
-            email: newUser.email,
-            role: newUser.role,
-            token: token,
-        },
-    });
 
-    
+
     res.redirect('/login')
 };

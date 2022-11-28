@@ -67,7 +67,7 @@ module.exports = function(app) {
     .get(mainController.getMyPostsPage);
 
     app.route("/logout")
-    .get(mainController.logout_get)
+    .get(mainController.logout_get);
 
     
     app.get('/admin', requireAuth, (req, res) => res.render('admin', { title:"AdminPage" }));
