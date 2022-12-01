@@ -63,6 +63,11 @@ exports.deleteUser = async (req, res) => {
 };
 
 
+exports.getMyPostsPage = (req, res) => {
+    res.render('myposts');
+};
+
+
 
 
 exports.getIndexPage = (req, res) => {
@@ -78,9 +83,7 @@ exports.getPostPage = (req, res) => {
 
 
 
-exports.getMyPostsPage = (req, res) => {
-  res.render('posts');
-};
+
 
 exports.getSellersPage = (req, res) => {
   res.render('sellers');
@@ -101,25 +104,24 @@ app.use(function(req, res, next) {
 
 exports.logout_get = (req, res) => {
   res.cookie('jwt', '', { maxAge: 1 });
-  console.log("tere")
   res.redirect('/login');
 }
 
 
 
 exports.register = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { name, password } = req.body;
 
 
   bcrypt.hash(password, 10).then(async (hash) => {
     await User.create({
-      username,
+      name,
       password: hash,
     })
       .then((user) => {
         const maxAge = 3 * 60 * 60;
         const token = jwt.sign(
-          { id: user._id, username, role: user.role },
+          { id: user._id, name, role: user.role },
           jwtSecret,
           {
             expiresIn: maxAge, // 3hrs in sec

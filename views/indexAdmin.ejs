@@ -19,14 +19,17 @@
       <div class="navbar">
     
         <div class="info">
-            <a class="active" href="/index">Cars List</a>
+            <a class="active" href="/">Cars List</a>
             <a href="/sellers">Sellers</a>
             <a href="/locations">Locations</a>
             <a href="/post">Post Ad</a>
-            <span class="Logged-in-text" v-if="token">Logged in <button class="logout" @click="doLogOff" href="">log
-              Out</button></span>
-          <span class="Logged-in-text" v-else>Logged Out <button class="logout" @click="showLogIn" href="">log
-              In</button></span>
+            <% if(!locals.token){ %>
+                <a class="logout" href="login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <% } %> 
+                <% if(locals.token) { %>
+                <a class="logout" href="logout"><i class="fas fa-sign-in-alt"></i> Logout</a>
+                <% } %>
+      
               <a href="/admin" class="admin">admin</a>
         </div>
     </div>

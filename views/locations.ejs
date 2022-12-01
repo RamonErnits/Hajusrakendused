@@ -12,14 +12,7 @@
 </head>
 <body>
 
-  <div class="navbar">
-    
-    <div class="info">
-        <a class="active" href="index">Cars List</a>
-        <a href="sellers">Sellers</a>
-        <a href="locations">Locations</a>
-    </div>
-</div>
+  <%- include('partials/navbar') %>
   
     <div id="app">
     <table id="carsTable" class="carsShow table-bordered table-hover ">
@@ -41,29 +34,45 @@
         </button>
       </div>
       <div class="modal-body">
-          <table>
-        <tr>
+        <table>
+          <tr>
             <th>id</th>
             <td>{{carInModal.id}}</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <th>brand</th>
             <td>{{carInModal.brand}}</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
+            <th>model</th>
+            <td>{{carInModal.model}}</td>
+          </tr>
+          <tr>
             <th>price</th>
             <td>{{carInModal.price}}</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
+            <th>year</th>
+            <td>{{carInModal.year}}</td>
+          </tr>
+          <tr>
+            <th>owner</th>
+            <td>{{carInModal.owner}}</td>
+          </tr>
+          <tr>
             <th>seller</th>
             <td>{{carInModal.seller}}</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <th>location</th>
             <td>{{carInModal.location}}</td>
-        </tr>
-    </table>
-    <button type="button bg-dark" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </tr>
+          <tr>
+            <th>color</th>
+            <td>{{carInModal.color}}</td>
+          </tr>
+        </table>
+        <button type="button bg-dark" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
 
       

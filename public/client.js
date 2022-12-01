@@ -20,7 +20,7 @@ createApp({
     },
     
     async created() {
-        this.cars = await (await fetch('http://localhost:3000/cars')).json();
+        this.car = await (await fetch(`${api_base}/cars`)).json()
         this.token = sessionStorage.getItem("token")===null?"":sessionStorage.getItem("token")
         console.log("Created",this.token);
 
@@ -30,23 +30,18 @@ createApp({
         console.log("Created",this.token);
     },
     methods: {
-        getUser: async function() {
-            this.users = await (await fetch(`http://localhost:3000/users`)).json()
-            console.log(this.users);
-          },  
-
         getcar: async function (id) {
             this.carInModal = await (await fetch(`http://localhost:3000/cars/${id}`)).json()
             console.log(this.carInModal);
             const carInfoModal = new bootstrap.Modal(document.getElementById('carInfoModal'), {})
             carInfoModal.show()
-        },
-        showLogin: function(event) {
-            console.log(event);
-            event.preventDefault()
-            this.loginModal = new bootstrap.Modal(document.getElementById("loginModal"), {})
-            this.loginModal.show()
-        },
+          },
+        getUser: async function() {
+            this.users = await (await fetch(`http://localhost:3000/users`)).json()
+            console.log(this.users);
+          },  
+
+        
         doLogIn: async function(){
             console.log("doLogIn");
             const response = await fetch(`${api_base}/login`,

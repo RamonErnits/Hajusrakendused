@@ -36,7 +36,7 @@ exports.postRegister = async (req, res, next) => {
 
     try {
         token = jwt.sign(
-            { userId: newUser.id, email: newUser.email, role: newUser.role },
+            { userId: newUser.id, email: newUser.email, role: newUser.role, name: newUser.name },
             JWT_SECRET,
             { expiresIn: "1h" }
         );

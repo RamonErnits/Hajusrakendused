@@ -12,8 +12,10 @@ const app = express();
 
 
 exports.getLoginPage = (req, res) => {
-    res.render('login');
+    res.render('login', {title: "Login"});
 };
+
+
 
 exports.postLogin = async (req, res, next) => { 
   
@@ -25,14 +27,14 @@ exports.postLogin = async (req, res, next) => {
     existingUser = await User.findOne({ email: email, role: role });
   } catch {
      return res.status(400).json((err))
+     
   }
   
 
   if (!existingUser || !await bcrypt.compare(req.body.password,existingUser.password)) {
     
-    const error = Error("Wrong details please check at once");  
-    return res.status(400).json(next(error))
-
+    res.status(400).json({message: "Invalid credentials, please try again."});
+    
   }
   
   let token;
@@ -40,14 +42,12 @@ exports.postLogin = async (req, res, next) => {
   try {
     //Creating jwt token
     token = jwt.sign(
-      { userId: existingUser.id, email: existingUser.email, role: existingUser.role },
+      { userId: existingUser.id, email: existingUser.email, role: existingUser.role, name: existingUser.name },
       JWT_SECRET,
       { expiresIn: "2 days" }
     );
   } catch (err) {
     console.log(err);
-    const error = new Error("Error! Something went wrong.");
-    return next(error);
   }
 
  res.cookie('jwt', token, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 })
@@ -57,16 +57,15 @@ exports.postLogin = async (req, res, next) => {
 
 if(role === "admin"){
   res.redirect('/admin');
-  const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role }, JWT_SECRET, { expiresIn: "2 days" });
+  const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role, name: existingUser.name  }, JWT_SECRET, { expiresIn: "2 days" });
 }
 
 
 if(role === "user"){
-  res.redirect('/index');
-  const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role }, JWT_SECRET, { expiresIn: "2 days" });
+  res.redirect('/');
+  const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role, name: existingUser.name  }, JWT_SECRET, { expiresIn: "2 days" });
 }
 
 console.log(token);
   
 };
-

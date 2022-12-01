@@ -1,107 +1,217 @@
 * {
-    margin:0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #bc986a;
-    color: black
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #bc986a;
+  color: black
+}
+
+.carsShow {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 800px;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row{
+  display: flex;
+}
+
+.column{
+  display: flex;
+}
+.loginmodal-content{
+  margin: 50px;
+  width: 300px;
+}
+.modal-content{
+  margin: 50px; 
+}
+
+.modal-body{
+  background-color: rgba(82,82,82,255);
+}
+
+.Logged-in-text{
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+}
+
+.info{
+  width: 20%;
+  margin: 0 auto;
+}
+
+.navbar{
+  background-color: #bc986a;
+  overflow: hidden;
+  
+}
+
+a{
+  background-color: #bc986a;
+}
+
+.admin{
+
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  
+  display: block;
+
+  padding: 5px;
+  
+  background-color: #bc986a;
+
+  border: 1px solid #bc986a;
+  
+  border-radius: 5px;
+  
+  color: #f2f2f2;
+  
+  text-decoration: none;
+  
+  font-size: 17px;
+  
+
+  
+  text-align: center;
+ 
+  z-index: 100;
+  
+}
+
+.logout{
+  float: right;
+  /* move button to the top right corner, add some space and disable outlines */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  outline: none;
+  /* remove default button styles */
+  border: none;
+  background: none;
+  /* set font styles */
+  font-family: sans-serif;
+  color: #fff;
+
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.logout:hover{
+  background: #fbeec1;
+  border-radius: 20%;
+  color: black;
+}
+.navbar a{
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  font-size: 17px;
+  align-items: center;
+
+}
+
+.admin-button{
+  float: left;
+  /* move button to the top right corner, add some space and disable outlines */
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  outline: none;
+  /* remove default button styles */
+  border: none;
+  background: none;
+  /* set font styles */
+  font-family: sans-serif;
+  color: #fff;
+
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+.admin-button:hover{
+  background: #fbeec1;
+  border-radius: 20%;
+  color: black;
+}
+
+.navbar a:hover{
+  background: #fbeec1;
+  border-radius: 20%;
+  color: black;
+}
+
+th,
+td {
+  padding: 7px;
+  background-color: rgba(255,255,255,0.2);
+  color: black;
+}
+
+th {
+  text-align: left;
+}
+
+thead >th {
+    background-color: wheat;
+}
+
+.modal-footer{
+  background-color: red(39, 39, 39);
+  margin: 0 auto;
+}
+
+.btn {
+  background-color: rgb(39, 39, 39);
+  margin-left :80%;
+  margin-top: 7px;
+}
+
+
+tbody >tr:hover{
+      background-color: #fbeec1;
+      color: black;
   }
-  
-  .carsShow {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    width: 800px;
-  }
-  
-  
-  .modal-body{
-    background-color: rgba(82,82,82,255);
-  
-  }
-  
-  .info{
-    width: 20%;
-    margin: 0 auto;
-  }
-  
-  .navbar{
-    background-color: #bc986a;
-    overflow: hidden;
+
+tbody>td:hover:before{
+  position: relative;
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -9999px;
+      bottom: -9999px;
+      background-color: rgba(0, 0, 0, 0.2);
+      z-index: -1;
     
-  }
-  
-  a{
-    background-color: #bc986a;
-  }
-  
-  .navbar a{
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 10px 10px;
-    text-decoration: none;
-    font-size: 17px;
-    align-items: center;
-  
-  }
-  
-  .navbar a:hover{
-    background: #fbeec1;
-    border-radius: 50%;
-    color: black;
-  }
-  
-  th,
-  td {
-    padding: 7px;
-    background-color: rgba(255,255,255,0.2);
-    color: black;
-  }
-  
-  th {
-    text-align: left;
-  }
-  
-  thead >th {
-      background-color: wheat;
-  }
-  
-  .modal-footer{
-    background-color: red(39, 39, 39);
-    margin: 0 auto;
-  }
-  
-  .btn {
-    background-color: rgb(39, 39, 39);
-    margin-left :80%;
-    margin-top: 7px;
-  }
-  
-  
-  tbody >tr:hover{
-        background-color: #fbeec1;
-        color: black;
-    }
-  
-  tbody>td:hover:before{
-    position: relative;
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: -9999px;
-        bottom: -9999px;
-        background-color: rgba(0, 0, 0, 0.2);
-        z-index: -1;
-      
-  }
-  
-  
-  table {
-  
-    border-collapse: collapse;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(172, 172, 172, 0.1);
-  }
-  
-  
+}
+
+
+table {
+
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(172, 172, 172, 0.1);
+  margin-left: -15px;
+}
+

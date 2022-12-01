@@ -2,8 +2,8 @@
 <html>
 
 <head>
-  <title></title>
-  <link rel="stylesheet" href="css/admin.css" />
+  <title>Edit Cars</title>
+  <link rel="stylesheet" href="../css/admin.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -17,7 +17,7 @@
       <p class="pagename">Admin</p>
       
       </p>
-      <a href="" class="icon-a"><i class="fa fa-dashboard icons"></i> Dashboard</a>
+      <a href="/admin" class="icon-a"><i class="fa fa-dashboard icons"></i> Dashboard</a>
       <a href="/admin/customers" class="icon-a"><i class="fa fa-users icons"></i> Customers</a>
       <a href="" class="icon-a"><i class="fa fa-shopping-bag icons"></i> Orders</a>
       <a href="" class="icon-a"><i class="fa fa-tasks icons"></i> Inventory</a>
@@ -36,8 +36,7 @@
 
       <div class="head">
         <div class="col-div-6">
-          <span style="font-size:30px;cursor:pointer; color: white;" class="nav">☰ Dashboard</span>
-          <span style="font-size:30px;cursor:pointer; color: white;" class="nav2">☰ Dashboard</span>
+          <span style="font-size:30px;cursor:pointer; color: white;" class="nav">Edit</span>
         </div>
 
         <div class="col-div-6">
@@ -71,10 +70,7 @@
             <td id="seller" class="seller">{{car.seller}}</td>
             <td id="location" class="location">{{car.location}}</td>
             <td>
-              <button class="delete-btn" @click="deletecar(car._id)">Delete</button>
-            </td>
-            <td>
-              <a href="/admin/edit" class="icon-a"><i class="fa fa-user icons"></i> Edit</a>
+              <button class="edit-btn" @click="editcar(car._id)">Confirm</button>
             </td>
           </tr>
         </table>

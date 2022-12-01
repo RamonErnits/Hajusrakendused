@@ -67,6 +67,8 @@ async function seedDB() {
 
         for (let i = 0; i < 15; i++) {
             const brand = faker.vehicle.vehicle();
+            const model = faker.vehicle.model();
+            const owner = faker.name.firstName();
             const price = faker.finance.amount(25, 100, 2,);
             const seller = faker.name.fullName();
             const location = faker.address.country();
@@ -80,6 +82,8 @@ async function seedDB() {
                     location,
                     year,
                     color,
+                    model,
+                    owner
             };
 
             
@@ -138,7 +142,7 @@ app.post("/login", async (req, res, next) => {
     .json({
       success: true,
       data: {
-        role: existingUser.role,
+        role: role,
         userId: existingUser.id,
         email: existingUser.email,
         token: token,

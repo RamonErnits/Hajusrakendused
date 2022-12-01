@@ -11,13 +11,19 @@ const app = express();
 
 
 exports.getAdminPage = (req, res) => {
-    const token = req.cookies.jwt;
-  console.log("token" + token);
-    res.render('admin'); 
+   // declare role
+    let role = req.body.role;
+    res.locals.user = user;
+    role === 'admin' ;
+    res.render('admin');
 };
   
 exports.getAccountsPage = (req, res) => {
     res.render('accounts');
+};
+
+exports.getEditPage = (req, res) => {
+    res.render('edit');
 };
 
 exports.getTasksPage = (req, res) => {

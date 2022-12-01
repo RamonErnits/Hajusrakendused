@@ -12,24 +12,18 @@
 </head>
 <body>
 
-  <div class="navbar">
-    
-    <div class="info">
-        <a class="active" href="index">Cars List</a>
-        <a href="sellers">Sellers</a>
-        <a href="locations">Locations</a>
-        <a href="post">Post Ad</a>
-        <button id="logout" class="logout">Log out</button>
-    </div>
-
-</div>
+    <%- include('partials/navbar') %>
   
 <!-- Create Post layout to be able to post cars -->
     <div id="app">
-    <form id="postForm" class="postForm" action="/post" method="POST">
+    <form id="postForm" class="postForm" action="/cars" method="POST">
         <div class="form-group">
             <label for="brand">Car brand</label>
             <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter car brand">
+        </div>
+        <div class="form-group">
+            <label for="seller">Car Model</label>
+            <input type="text" class="form-control" id="model" name="model" placeholder="Enter car model">
         </div>
         <div class="form-group">
             <label for="price">Car price</label>
@@ -40,11 +34,26 @@
             <input type="text" class="form-control" id="seller" name="seller" placeholder="Enter car seller">
         </div>
         <div class="form-group">
+            <label for="seller">Car owner</label>
+            <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter car owner">
+        </div>
+        <div class="form-group">
+            <label for="seller">Car color</label>
+            <input type="text" class="form-control" id="color" name="color" placeholder="Enter car color">
+        </div>
+        <div class="form-group">
+            <label for="seller">Car year</label>
+            <input type="number" class="form-control" id="year" name="year" placeholder="Enter car year">
+        </div>
+        <div class="form-group">
             <label for="location">Car location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Enter car location">
+            <input type="name" class="form-control" id="location" name="location" placeholder="Enter car location">
         </div>
         <a href="myposts">My Posts</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div id="success"></div>
+              <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit" style="width: 306px;">Add
+                  new car post</button>
+              </div>
     </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

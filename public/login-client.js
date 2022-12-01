@@ -16,7 +16,7 @@ createApp({
     },
     
     async created() {
-        this.cars = await (await fetch(`${api_base}/index`)).json()
+        this.cars = await (await fetch(`${api_base}/`)).json()
         this.token = sessionStorage.getItem("token")===null?"":sessionStorage.getItem("token")
         console.log("Created",this.token);
     },
@@ -60,7 +60,7 @@ createApp({
             // delete user cookies
             this.token = ""
             sessionStorage.removeItem("token")
-            this.$router.push("/index")
+            this.$router.push("/")
 
         }
     }

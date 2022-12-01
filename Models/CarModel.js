@@ -12,6 +12,10 @@ const CarSchema = new Schema({
         type: String,
         required: "Car model is required"
     },
+    price : {
+        type: Number,
+        required: "Car price is required"
+    },
     year: {
         type: Number,
         required: "Car year is required"
@@ -24,10 +28,7 @@ const CarSchema = new Schema({
         type: String,
         required: "Car seller is required"
     },
-    price : {
-        type: Number,
-        required: "Car price is required"
-    },
+    
     location : {
         type: String,
         required: "Car location is required"

@@ -131,6 +131,29 @@ a{
 
 }
 
+.admin-button{
+  float: left;
+  /* move button to the top right corner, add some space and disable outlines */
+  position: absolute;
+  top: 10px;
+  right: 100px;
+  outline: none;
+  /* remove default button styles */
+  border: none;
+  background: none;
+  /* set font styles */
+  font-family: sans-serif;
+  color: #fff;
+
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+.admin-button:hover{
+  background: #fbeec1;
+  border-radius: 20%;
+  color: black;
+}
 
 .navbar a:hover{
   background: #fbeec1;
