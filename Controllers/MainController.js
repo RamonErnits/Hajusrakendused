@@ -67,6 +67,9 @@ exports.getMyPostsPage = (req, res) => {
     res.render('myposts');
 };
 
+exports.getTestPage = (req, res) => {
+  res.render('testindex')
+}
 
 
 

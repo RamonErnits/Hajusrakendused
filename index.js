@@ -65,8 +65,8 @@ async function seedDB() {
         // make a bunch of time series data
         let timeSeriesData = [];
 
-        for (let i = 0; i < 15; i++) {
-            const brand = faker.vehicle.vehicle();
+        for (let i = 0; i < 16; i++) {
+            const brand = faker.vehicle.manufacturer();
             const model = faker.vehicle.model();
             const owner = faker.name.firstName();
             const price = faker.finance.amount(25, 100, 2,);

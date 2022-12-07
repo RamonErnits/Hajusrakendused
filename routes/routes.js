@@ -42,6 +42,9 @@ module.exports = function (app) {
         res.render('index', { title: 'Home' });
     });
 
+    app.route('/test')
+    .get(mainController.getTestPage)
+
     app.get('/admin', checkAdmin, requireAuth, checkUser, function (req, res) {
         res.render('admin', { title: 'Admin' });
     });
