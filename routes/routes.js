@@ -8,13 +8,16 @@ const User = require('../Models/userModel');
 
 module.exports = function (app) {
     app.route('/cars')
-        .get(car.getAll)
-        .post(car.createNew);         //Create
+        .get(car.getAllCars)
+        .post(car.createNew);           //Create
 
     app.route('/cars/:id')
-        .get(car.getById)            //Read
-        .put(car.editById)            //Update
-        .delete(car.deleteById);      //Delete
+        .get(car.getCar)            //Read
+        // .put(car.editCar)            //Update
+        .delete(car.deleteCar);         //Delete
+
+    app.route('/cars/update/:id')
+    .put(car.editCar);                 //Update
 
     app.route('/users')
         .get(mainController.getAllUsers)    //Get Users
@@ -78,16 +81,10 @@ module.exports = function (app) {
         res.render('post', { title: 'Home' });
     });
 
-    app.route('/myposts')
-        .get(mainController.getMyPostsPage);
+    app.get('/myposts', checkUser, requireAuth, function (req, res) {
+        res.render('myposts', { title: 'Home' });
+    });
 
     app.route("/logout")
         .get(mainController.logout_get);
-
-
-    
-    // app.get('/admin', requireAuth, checkAdmin, (req, res) => res.render('admin'));
-    // app.get('/', requireAuth, checkUser, (req, res) => res.render('index'));
-
-
 }

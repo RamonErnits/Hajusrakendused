@@ -1,100 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/post.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <title>Posts</title>
-  
+
 </head>
+
 <body>
 
     <%- include('partials/navbar') %>
-  
-<!-- Create Post layout to be able to post cars -->
-    <div id="app">
-    <form id="postForm" class="postForm" action="/cars" method="POST">
-        <div class="form-group">
-            <label for="brand">Car brand</label>
-            <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter car brand">
+
+        <!-- Create Post layout to be able to post cars -->
+        <div id="app">
+            <form action="/cars" method="POST">
+                <div class="control-group">
+                    <div class="mb-2 form-floating controls pb-2"><input type="name" required name="brand"
+                            placeholder="enter the brand" style="width: 306px;">
+                    </div>
+                </div>
+                    <div class="control-group">
+                        <div class="mb-2 form-floating controls pb-2"><input type="name" required name="model"
+                                placeholder="enter the model" style="width: 306px;">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="mb-0 form-floating controls pb-2"><input type="number" required name="price"
+                                placeholder="enter the price" style="width: 306px;"></div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="mb-0 form-floating controls pb-2"><input type="name" required name="year"
+                                placeholder="enter the year" style="width: 306px;"></div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="mb-0 form-floating controls pb-2"><input type="name" required name="seller"
+                                placeholder="enter the seller" style="width: 306px;"></div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="mb-0 form-floating controls pb-2"><input type="name" required name="owner"
+                                placeholder="enter the owner" style="width: 306px;"></div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="mb-0 form-floating controls pb-2"><input type="name" required name="location"
+                                placeholder="enter the location" style="width: 306px;"></div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="mb-0 form-floating controls pb-2"><input type="name" required name="color"
+                                placeholder="enter the color" style="width: 306px;"></div>
+                    </div>
+
+                    <div id="success"></div>
+                    <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit"
+                            style="width: 306px;">Add
+                            new Post</button>
+                    </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="seller">Car Model</label>
-            <input type="text" class="form-control" id="model" name="model" placeholder="Enter car model">
-        </div>
-        <div class="form-group">
-            <label for="price">Car price</label>
-            <input type="text" class="form-control" id="price" name="price" placeholder="Enter car price">
-        </div>
-        <div class="form-group">
-            <label for="seller">Car seller</label>
-            <input type="text" class="form-control" id="seller" name="seller" placeholder="Enter car seller">
-        </div>
-        <div class="form-group">
-            <label for="seller">Car owner</label>
-            <input type="text" class="form-control" id="owner" name="owner" placeholder="Enter car owner">
-        </div>
-        <div class="form-group">
-            <label for="seller">Car color</label>
-            <input type="text" class="form-control" id="color" name="color" placeholder="Enter car color">
-        </div>
-        <div class="form-group">
-            <label for="seller">Car year</label>
-            <input type="number" class="form-control" id="year" name="year" placeholder="Enter car year">
-        </div>
-        <div class="form-group">
-            <label for="location">Car location</label>
-            <input type="name" class="form-control" id="location" name="location" placeholder="Enter car location">
-        </div>
-        <a href="myposts">My Posts</a>
-        <div id="success"></div>
-              <div><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit" style="width: 306px;">Add
-                  new car post</button>
-              </div>
-    </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 </body>
- 
-      
+
+
 <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 <script>
 
 
-/*if the submit button is clicked save inserted data to database and display it in the my posts page */
-$(document).ready(function(){
-    $("#postForm").submit(function(e){
-        e.preventDefault();
-        var brand = $("#brand").val();
-        var price = $("#price").val();
-        var seller = $("#seller").val();
-        var location = $("#location").val();
-        alert("Your post has been submitted successfully");
-        $.ajax({
-            url: "/myposts",
-            type: "POST",
-            data: {
-                brand: brand,
-                price: price,
-                seller: seller,
-                location: location
-            },
-            success: function(data){
-                console.log(data);
-                window.location.href = "/myposts";
-            }
+    /*if the submit button is clicked save inserted data to database and display it in the my posts page */
+    $(document).ready(function () {
+        $("#postForm").submit(function (e) {
+            e.preventDefault();
+            var brand = $("#brand").val();
+            var price = $("#price").val();
+            var seller = $("#seller").val();
+            var location = $("#location").val();
+            alert("Your post has been submitted successfully");
+            $.ajax({
+                url: "/myposts",
+                type: "POST",
+                data: {
+                    brand: brand,
+                    price: price,
+                    seller: seller,
+                    location: location
+                },
+                success: function (data) {
+                    console.log(data);
+                    window.location.href = "/myposts";
+                }
+            });
         });
     });
-});
 
 
 
@@ -108,4 +121,5 @@ $(document).ready(function(){
 </script>
 
 </body>
+
 </html>

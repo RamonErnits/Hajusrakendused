@@ -6,6 +6,13 @@ body {
   font-family: system-ui;
 }
 
+.container {
+  display: flex;
+  width: 1040px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
 .clearfix {
   clear: both;
 }

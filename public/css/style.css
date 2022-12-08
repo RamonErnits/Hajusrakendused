@@ -15,13 +15,19 @@ body {
     color: #a0a1a5;
 }
 
-.buttons {
-    /* put the buttons in the same line */
-    display: inline;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
+.pro-img {
+    float: left;
+    width: 40px;
+    margin-top: 5px;
+  }
+
+.pro-name {
+    float: left;
+    margin-left: 10px;
+    margin-top: 14px;
+  }
+
+
 
 .carsShow {
     position: absolute;
@@ -156,7 +162,10 @@ img {
     justify-content: center;
     align-items: center;
     text-align: center;
+}
 
+.logout, .admin-button{
+    float: right;
 }
 
 .navbar a {
@@ -222,7 +231,13 @@ img {
     transform: translateY(2px);
 }
 
-
+.buttons {
+    /* put the buttons in the same line */
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
 
 .order-btn {
     display: flex;
@@ -238,6 +253,7 @@ img {
     position: relative;
     overflow: hidden;
     z-index: 1;
+    text-decoration: none;
 }
 
 .order-btn:after {
@@ -322,4 +338,53 @@ img {
 
 .details-btn:hover:before {
     width: 100%;
+}
+
+.delete-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    margin-right: 25px;
+}
+
+.delete-btn {
+    display: flex;
+    float: center;
+    appearance: none;
+    background: red;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    text-decoration: none;
+    transition: box-shadow .15s, transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    margin-top: 10px;
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.1rem;
+}
+
+.delete-btn:focus {
+    box-shadow: red 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, red 0 -3px 0 inset;
+}
+
+.delete-btn:hover {
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgb(204, 0, 0) 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.delete-btn:active {
+    box-shadow: red 0 3px 7px inset;
+    transform: translateY(2px);
 }

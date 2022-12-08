@@ -1,4 +1,4 @@
-//import {faker} from '@faker-js/faker';
+
 const { faker } = require('@faker-js/faker');
 
 
@@ -36,7 +36,7 @@ exports.createNew = function(req, res) {    //Create
     res.status(201).json(car[length - 1]);
 };
 
-exports.getById = function(req, res) {      //Read
+exports.getcarById = function(req, res) {      //Read
     if(!(parseInt(req.params.id) > 0)){
         res.status(400).send('Id must be a positive integer');
         return;
@@ -49,7 +49,7 @@ exports.getById = function(req, res) {      //Read
     res.send(result);
 };
 
-exports.editById = function(req, res) {     //Update
+exports.editCar = function(req, res) {     //Update
     if(!(parseInt(req.params.id) > 0)){
         res.status(400).send('Id must be a number');
         return;
@@ -65,7 +65,7 @@ exports.editById = function(req, res) {     //Update
     
 };
 
-exports.deleteById = function(req, res) {    //Delete
+exports.deleteCar = function(req, res) {    //Delete
     if(!(parseInt(req.params.id))){
         res.status(400).send('Id must be a number');
         return;

@@ -39,7 +39,27 @@ createApp({
         getUser: async function() {
             this.users = await (await fetch(`http://localhost:3000/users`)).json()
             console.log(this.users);
-          },  
+          }, deleteItem: async function (car) {
+            let requestOptions = {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+            }
+  
+            const response = await fetch("/delete/:id", requestOptions); // <----- HERE! 
+            if (response.status != 204) {
+              throw Error("Cannot delete your item from list");
+            }
+            return car;
+          },
+          confirmDeleteCar: async function (carId) {
+            var shouldDelete = confirm('Are you sure you want to delete this car?')
+            if (shouldDelete) {
+              console.log('deleting car with id: ' + carId)
+              await(await fetch(`http://localhost:3000/cars/${carId}`, {
+                method: 'delete'
+              }))
+            }
+          },
 
         
         doLogIn: async function(){

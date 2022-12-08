@@ -16,100 +16,115 @@
 <body>
   <div id="app">
     <%- include('partials/navbar') %>
-    <div class="container">
+      <div class="container">
 
 
-      <div v-for="car in cars">
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="card">
-              <div class="card-header">
-                <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" />
-              </div>
-              <div class="card-body">
-                <h2><h3 class="text-black">{{car.brand}}</h1></h2>
-                <span class="list-meta">
-                  <span class="list-meta-item"><i class="fas fa-euro-sign price"></i> Price
-                    {{car.price}}</span>
-                  <br>
-                  <br>
-                </span>
-                <p class="model">model: {{car.model}}</p>
-                <span class="list-meta-item"><i class="year"></i>Year {{car.year}}</span>
-                <br>
-                <div class="card-info">
-                  <img class="profile-image" src="images/profile.jpg" alt="profile">
-                  <p class="seller">Seller: {{car.seller}}</p>
-                  <div class="buttons">
-                    <button @click="getcar(car._id)" class="details-btn">Details</button>
-                    <button type="button" class="order-btn">Order</button>
-                  </div>
-                  
+        <div v-for="car in cars">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="card">
+                <div class="card-header">
+                  <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" />
                 </div>
+                <div class="card-body">
+                  <h2>
+                    <h3 class="text-black">{{car.brand}}</h1>
+                  </h2>
+                  <span class="list-meta">
+                    <span class="list-meta-item"><i class="fas fa-euro-sign price"></i> Price
+                      {{car.price}}</span>
+                    <br>
+                    <br>
+                  </span>
+                  <p class="model">model: {{car.model}}</p>
+                  <span class="list-meta-item"><i class="year"></i>Year {{car.year}}</span>
+                  <br>
+                  <div class="card-info">
+                    <img class="profile-image" src="images/profile.jpg" alt="profile">
+                    <p class="seller">Seller: {{car.seller}}</p>
+                    <div class="buttons">
+                      <% if(locals.token && locals.role=='user' ){ %>
+                        <button @click="getcar(car._id)" class="details-btn">Details</button>
+                        <button type="button" class="order-btn">Order</button>
+                        <% } %>
+                          <% if(locals.token && locals.role=='admin' ){ %>
+                            <button @click="getcar(car._id)" class="details-btn">Details</button>
+                            <a href="/admin/edit" type="button" class="order-btn">Edit Order</a>
+                            <% } %>
 
+                    </div>
+                    <% if(locals.token && locals.role=='admin' ){ %>
+                      <div class="delete-btns">
+                        <!-- <form :action="`cars/update/${car._id}`" method="DELETE">  -->
+                        <button class="delete-btn" @click="confirmDeleteCar(car._id)" type="submit">Delete</button>
+                        <!-- </form>    -->
+                      </div>
+                      <% } %>
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="modal fade modal-sm " id="carInfoModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-      aria-labelledby="carInfoModal" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header ">
-            <h5 class="modal-title">Cars details<h5>
-                <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-                </button>
+      <div class="modal fade modal-sm " id="carInfoModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="carInfoModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header ">
+              <h5 class="modal-title">Cars details<h5>
+                  <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                  </button>
+            </div>
+            <div class="modal-body">
+              <table>
+                <tr>
+                  <th>id: </th>
+                  <td>{{carInModal.id}}</td>
+                </tr>
+                <tr>
+                  <th>brand: </th>
+                  <td>{{carInModal.brand}}</td>
+                </tr>
+                <tr>
+                  <th>model: </th>
+                  <td>{{carInModal.model}}</td>
+                </tr>
+                <tr>
+                  <th>price: </th>
+                  <td>{{carInModal.price}}</td>
+                </tr>
+                <tr>
+                  <th>year: </th>
+                  <td>{{carInModal.year}}</td>
+                </tr>
+                <tr>
+                  <th>owner: </th>
+                  <td>{{carInModal.owner}}</td>
+                </tr>
+                <tr>
+                  <th>seller: </th>
+                  <td>{{carInModal.seller}}</td>
+                </tr>
+                <tr>
+                  <th>location: </th>
+                  <td>{{carInModal.location}}</td>
+                </tr>
+                <tr>
+                  <th>color: </th>
+                  <td>{{carInModal.color}}</td>
+                </tr>
+              </table>
+              <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
-          <div class="modal-body">
-            <table>
-              <tr>
-                <th>id: </th>
-                <td>{{carInModal.id}}</td>
-              </tr>
-              <tr>
-                <th>brand: </th>
-                <td>{{carInModal.brand}}</td>
-              </tr>
-              <tr>
-                <th>model: </th>
-                <td>{{carInModal.model}}</td>
-              </tr>
-              <tr>
-                <th>price: </th>
-                <td>{{carInModal.price}}</td>
-              </tr>
-              <tr>
-                <th>year: </th>
-                <td>{{carInModal.year}}</td>
-              </tr>
-              <tr>
-                <th>owner: </th>
-                <td>{{carInModal.owner}}</td>
-              </tr>
-              <tr>
-                <th>seller: </th>
-                <td>{{carInModal.seller}}</td>
-              </tr>
-              <tr>
-                <th>location: </th>
-                <td>{{carInModal.location}}</td>
-              </tr>
-              <tr>
-                <th>color: </th>
-                <td>{{carInModal.color}}</td>
-              </tr>
-            </table>
-            <button type="button" class="close-btn" data-bs-dismiss="modal">Close</button>
-          </div>
+
         </div>
 
+
       </div>
-
-
-    </div>
 
   </div>
 
@@ -119,6 +134,7 @@
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
     crossorigin="anonymous"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  
   <script type="module">
     import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
@@ -126,7 +142,7 @@
       data() {
         return {
           carInModal: {},
-          cars: []
+          cars: [],
         }
       },
       async created() {
@@ -137,11 +153,41 @@
         getcar: async function (id) {
           this.carInModal = await (await fetch(`http://localhost:3000/cars/${id}`)).json()
           console.log(this.carInModal);
+          console.log('getting car with id: ' + id)
           const carInfoModal = new bootstrap.Modal(document.getElementById('carInfoModal'), {})
           carInfoModal.show()
+        },
+        deleteItem: async function (car) {
+          let requestOptions = {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          }
+
+          const response = await fetch("/delete/:id", requestOptions); // <----- HERE! 
+          if (response.status != 204) {
+            throw Error("Cannot delete your item from list");
+          }
+          return car;
+        },
+        confirmDeleteCar: async function (id) {
+
+          var shouldDelete = confirm("Are you sure you want to delete this item?");
+          if (shouldDelete) {
+            console.log(id + " deleted");
+            await (await fetch(`http://localhost:3000/cars/${id}`,{
+              method:'delete',
+            }));
+          
+
+            this.cars = this.cars.filter((car) => car._id != id);
+          }
         }
+        
+
       }
     }).mount('#app')
+
+   
   </script>
 
 </body>

@@ -1,29 +1,37 @@
 <div class="navbar">
 
-      <div class="info">
-        <a class="active" href="/">Cars List</a>
-        <a href="sellers">Sellers</a>
-        <a href="locations">Locations</a>
-        <a href="post">Post Ad</a>
+  <div class="info">
+    <a class="active" href="/">Cars List</a>
+    <a href="sellers">Sellers</a>
+    <a href="locations">Locations</a>
+    <a href="post">Post Ad</a>
 
 
-        <% if(!locals.token){ %>
-          <a class="logout" href="login"><i class="fas fa-sign-in-alt"></i> Login</a>
-          <% } %>
-            <% if(locals.token) { %>
-              <a class="logout" href="logout"><i class="fas fa-sign-in-alt"></i> Logout</a>
-              <% } %>
-
-        
-        <% if(locals.token && locals.role == 'admin'){ %>
-          <a class="admin-button" href="admin"><i class="fas fa-sign-in-alt"></i> Admin</a>
+    <% if(!locals.token){ %>
+      <a class="logout" href="login"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <% } %>
+        <% if(locals.token) { %>
+          <a class="logout" href="logout"><i class="fas fa-sign-in-alt"></i> Logout</a>
           <% } %>
 
-       
+
+
+            <% if(locals.token && locals.role=='admin' ){ %>
+              <a class="admin-button" href="admin"><i class="fas fa-sign-in-alt"></i> Admin</a>
+              <img src="/images/profile.jpg" class="pro-img" />
+              <p class="pro-name">Welcome Admin! <%= locals.name %>
+                  <% } %>
+
+                    <% if(locals.token && locals.role=='user' ){ %>
+                      <img src="/images/profile.jpg" class="pro-img" />
+                      <p class="pro-name">Welcome User! <%= locals.name %>
+                          <% } %>
 
 
 
 
 
-      </div>
-    </div>
+
+
+  </div>
+</div>
