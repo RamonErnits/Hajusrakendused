@@ -15,6 +15,33 @@ exports.getLoginPage = (req, res) => {
     res.render('login', {title: "Login"});
 };
 
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { email: '', password: '' };
+
+  if (err.message === 'incorrect email') {
+    errors.email = 'Incorrect email or password';
+  }
+
+  if (err.message === 'incorrect password') {
+    errors.password = 'Incorrect email or password';
+  }
+
+  if (err.code === 11000) {
+    errors.email = 'that email is already registered';
+    return errors;
+  }
+
+
+  if (err.message.includes('user validation failed')) {
+    Object.values(err.errors).forEach(({ properties }) => {
+
+      errors[properties.path] = properties.message;
+    });
+  }
+
+  return errors;
+}
 
 
 exports.postLogin = async (req, res, next) => { 
@@ -32,9 +59,7 @@ exports.postLogin = async (req, res, next) => {
   
 
   if (!existingUser || !await bcrypt.compare(req.body.password,existingUser.password)) {
-    
-    res.status(400).json({message: "Invalid credentials, please try again."});
-    
+    return res.status(400).json({message: "Invalid credentials"})
   }
   
   let token;
@@ -56,7 +81,7 @@ exports.postLogin = async (req, res, next) => {
  
 
 if(role === "admin"){
-  res.redirect('/admin');
+  res.redirect('/');
   const token = jwt.sign({ userId: existingUser.id, email: existingUser.email, role: existingUser.role, name: existingUser.name  }, JWT_SECRET, { expiresIn: "2 days" });
 }
 

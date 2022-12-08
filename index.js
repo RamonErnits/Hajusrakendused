@@ -338,7 +338,18 @@ app.post('cars/delete/:id', async (req, res) => {
   return res.redirect('/')
 });
 
-
+app.post('cars/update/:id', async (req, res) => {
+  await Car.updateOne({_id: req.params.id}, {
+    brand: req.body.brand,
+    model: req.body.model,
+    year: req.body.year,
+    owner: req.body.owner,
+    seller: req.body.seller,
+    price: req.body.price,
+    location: req.body.location
+  })
+  return res.redirect('/')
+});
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

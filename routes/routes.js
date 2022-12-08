@@ -17,7 +17,7 @@ module.exports = function (app) {
         .delete(car.deleteCar);         //Delete
 
     app.route('/cars/update/:id')
-    .put(car.editCar);                 //Update
+        .post(car.editCar);                 //Update
 
     app.route('/users')
         .get(mainController.getAllUsers)    //Get Users
@@ -52,7 +52,7 @@ module.exports = function (app) {
         res.render('admin', { title: 'Admin' });
     });
 
-    app.get('/admin/edit', checkAdmin, requireAuth, checkUser, function (req, res) {
+    app.get('/edit', checkAdmin, requireAuth, checkUser, function (req, res) {
         res.render('edit', { title: 'Admin' });
     });
 

@@ -14,15 +14,16 @@ exports.getAllCars = function (req, res) {
 };
 
 // create new add
-exports.createNew = function (req, res) {
-    const car = new car(req.body);
-    Car.save((err, car) => {
+exports.createNew = function (req, res, next) {
+    const newCar = new Car(req.body);
+    newCar.save((err, car) => {
         if (err) {
             res.status(400).send(err);
-        } else {
+        } else{
             res.status(201).json(car);
         }
     });
+
 };
 
 exports.getCar = function (req, res) {
@@ -46,16 +47,16 @@ exports.editCar = function (req, res) {
         res.status(400).send({ error: "ID must be a positive integer" })
         return
     }
-    Car.updateOne({ _id: req.params.carId }, { $set: req.body }, null, (err, car) => {
+   console.log('edit car req body: ',req.body);
+   Car.updateOne({_id: (req.params.id)},{$set: req.body},null,(err,car)=>{
+        
         if (err) {
-            res.send(err);
+            res.status(400).send(err)
         } else {
-            console.log(car);
-            res.status(200).json(car);
+            console.log("edit car", car);
+            res.status(200).json(car)
         }
-
-    });
-
+    })
 
 };
 
@@ -69,12 +70,8 @@ exports.deleteCar = function (req, res) {
         if (err) {
             res.status(400).send(err)
         } else {
-            res.status(200).json()
+            res.status(200).json(car)
         }
     })
-    
-
-
-
 
 };
