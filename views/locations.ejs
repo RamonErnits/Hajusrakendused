@@ -27,7 +27,7 @@
                 <img src="https://media.istockphoto.com/id/1193451471/vector/map-pin-vector-glyph-icon.jpg?s=612x612&w=0&k=20&c=wuWVeHuthNAXzjOO5_VY9SUOd-6cxwpVH8VVfh6Y7Lc=" alt="rover" />
               </div>
               <div class="card-body">
-                <h2><h3 class="text-black">{{car.location}}</h1></h2>
+                <h2><h4 class="text-black">{{car.location}}</h4></h2>
                 <span class="list-meta">
                   <span class="list-meta-item"><i class="fas fa-euro-sign price"></i> Selling:
                     {{car.brand}}</span>
@@ -41,9 +41,22 @@
                   <img class="profile-image" src="images/profile.jpg" alt="profile">
                   <p class="seller">Seller: {{car.seller}}</p>
                   <div class="buttons">
-                    <button @click="getcar(car._id)" class="details-btn">Details</button>
-                    <button type="button" class="order-btn">Order</button>
+                    <% if(locals.token && locals.role=='user' ){ %>
+                      <button @click="getcar(car._id)" class="details-btn">Details</button>
+                      <% } %>
+                        <% if(locals.token && locals.role=='admin' ){ %>
+                          <button @click="getcar(car._id)" class="details-btn">Details</button>
+                          <a href="/edit" type="button" class="order-btn">Edit Order</a>
+                          <% } %>
+
                   </div>
+                  <% if(locals.token && locals.role=='admin' ){ %>
+                    <div class="delete-btns">
+                      <!-- <form :action="`cars/update/${car._id}`" method="DELETE">  -->
+                      <button class="delete-btn" @click="confirmDeleteCar(car._id)" type="submit">Delete</button>
+                      <!-- </form>    -->
+                    </div>
+                    <% } %>
                   
                 </div>
 

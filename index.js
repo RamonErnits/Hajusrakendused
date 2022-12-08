@@ -324,14 +324,15 @@ app.post('/users/delete/:id', async (req, res) => {
   return res.redirect('/admin/accounts')
 });
 
-app.post('/users/update/:id', async (req, res) => {
+exports.EditUser = async (req, res) => {
+  // edit car by id
   await User.updateOne({_id: req.params.id}, {
     name: req.body.name,
     email: req.body.email,
-    role: req.body.role
+    role: req.body.role,
   })
-  return res.redirect('/admin/accounts')
-});
+};
+
 
 app.post('cars/delete/:id', async (req, res) => {
   await Car.deleteOne({_id: req.params.id})

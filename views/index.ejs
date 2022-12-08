@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-body">
                   <h2>
-                    <h3 class="text-black">{{car.brand}}</h1>
+                    <h4 class="text-black">{{car.brand}}</h4>
                   </h2>
                   <span class="list-meta">
                     <span class="list-meta-item"><i class="fas fa-euro-sign price"></i> Price
@@ -45,7 +45,6 @@
                     <div class="buttons">
                       <% if(locals.token && locals.role=='user' ){ %>
                         <button @click="getcar(car._id)" class="details-btn">Details</button>
-                        <button type="button" class="order-btn">Order</button>
                         <% } %>
                           <% if(locals.token && locals.role=='admin' ){ %>
                             <button @click="getcar(car._id)" class="details-btn">Details</button>

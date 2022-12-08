@@ -46,7 +46,7 @@ const handleErrors = (err) => {
 
 exports.postLogin = async (req, res, next) => { 
   
-  const { role, email, password } = req.body;
+  const { name, role, email, password } = req.body;
     
   let existingUser;
 
@@ -59,7 +59,7 @@ exports.postLogin = async (req, res, next) => {
   
 
   if (!existingUser || !await bcrypt.compare(req.body.password,existingUser.password)) {
-    return res.status(400).json({message: "Invalid credentials"})
+    return res.status(400).json((err));
   }
   
   let token;

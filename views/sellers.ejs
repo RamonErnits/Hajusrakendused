@@ -26,7 +26,7 @@
                 <img src="images/profile.jpg" alt="rover" />
               </div>
               <div class="card-body">
-                <h2><h3 class="text-black">{{car.seller}}</h1></h2>
+                <h2><h4 class="text-black">{{car.seller}}</h4></h2>
                 <span class="list-meta">
                   <span class="list-meta-item"><i class="fas fa-euro-sign price"></i> Selling:
                     {{car.brand}}</span>
@@ -42,12 +42,20 @@
                   <div class="buttons">
                     <% if(locals.token && locals.role=='user' ){ %>
                       <button @click="getcar(car._id)" class="details-btn">Details</button>
-                      <button type="button" class="order-btn">Order</button>
                       <% } %>
                         <% if(locals.token && locals.role=='admin' ){ %>
                           <button @click="getcar(car._id)" class="details-btn">Details</button>
                           <a href="/edit" type="button" class="order-btn">Edit Order</a>
                           <% } %>
+
+                  </div>
+                  <% if(locals.token && locals.role=='admin' ){ %>
+                    <div class="delete-btns">
+                      <!-- <form :action="`cars/update/${car._id}`" method="DELETE">  -->
+                      <button class="delete-btn" @click="confirmDeleteCar(car._id)" type="submit">Delete</button>
+                      <!-- </form>    -->
+                    </div>
+                    <% } %>
 
                   </div>
                   

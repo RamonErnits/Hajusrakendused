@@ -1,4 +1,4 @@
-require ('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcrypt');
@@ -10,61 +10,65 @@ const app = express();
 
 
 exports.getAllUsers = async (req, res) => {
-    const user = await User.find();
-    res.status(200).json({
-        success: true,
-        data: user,
-    });
+  const user = await User.find();
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
 };
 
 exports.getUsersById = async (req, res) => {
   const user = await User.findById(req.params.id);
-    try {
-        user = await User.findById(req.params.id);
-        if (user == null) {
-            return res.status(404).json({ message: 'Cannot find user' })
-        }
-    } catch (err) {
-        return res.status(500).json({ message: err.message })
+  try {
+    user = await User.findById(req.params.id);
+    if (user == null) {
+      return res.status(404).json({ message: 'Cannot find user' })
     }
-    res.json(user)
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+  res.json(user)
 };
 
 exports.EditUser = async (req, res) => {
-    User.updateOne({ _id: req.params.id }, { $set: { name: req.body.name, email: req.body.email, password: req.body.password, role: req.body.role } })
-        .then(result => {
-            res.status(200).json({
-                success: true,
-                data: result,
-            });
-        })
-        .catch(err => {
-            res.status(400).json({
-                success: false,
-                data: err,
-            });
-        });
+  // edit car by id
+  if (!(parseInt(req.params.id) > 0)) {
+    res.status(400).send({ error: "ID must be a positive integer" })
+    return
+  }
+  console.log("edit user req body: ", req.body)
+  User.updateOne({ _id: (req.params.id) }, { $set: req.body }, null, (err, user)=>{
+
+    if (err) {
+      res.status(400).send(err)
+    } else {
+      console.log("edit user:", user);
+      res.status(200).redirect('/accounts');
+    }
+  
+  })
+  
 };
 
 exports.deleteUser = async (req, res) => {
-    user.deleteOne({ _id: req.params.id })
-        .then(result => {
-            res.status(200).json({
-                success: true,
-                data: result,
-            });
-        })
-        .catch(err => {
-            res.status(400).json({
-                success: false,
-                data: err,
-            });
-        });
+  User.deleteOne({ _id: req.params.id })
+    .then(result => {
+      res.status(200).json({
+        success: true,
+        data: result,
+      });
+    })
+    .catch(err => {
+      res.status(400).json({
+        success: false,
+        data: err,
+      });
+    });
 };
 
 
 exports.getMyPostsPage = (req, res) => {
-    res.render('myposts');
+  res.render('myposts');
 };
 
 exports.getTestPage = (req, res) => {
@@ -98,10 +102,10 @@ exports.getLocationsPage = (req, res) => {
 
 
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
 

@@ -17,14 +17,14 @@
 
 
             <% if(locals.token && locals.role=='admin' ){ %>
-              <a class="admin-button" href="admin"><i class="fas fa-sign-in-alt"></i> Admin</a>
+              <a class="admin-button" href="accounts"><i class="fas fa-sign-in-alt"></i> Accounts</a>
               <img src="/images/profile.jpg" class="pro-img" />
               <p class="pro-name">Welcome Admin! <%= locals.name %>
                   <% } %>
 
                     <% if(locals.token && locals.role=='user' ){ %>
                       <img src="/images/profile.jpg" class="pro-img" />
-                      <p class="pro-name">Welcome User! <%= locals.name %>
+                      <p class="pro-name">Welcome! <%= locals.name %>
                           <% } %>
 
 

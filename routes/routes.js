@@ -24,8 +24,11 @@ module.exports = function (app) {
 
     app.route('/users/:id')
         .get(mainController.getUsersById)    //Get User by ID
-        .put(mainController.EditUser)       //Edit User
+        // .post(mainController.EditUser)       //Edit User
         .delete(mainController.deleteUser); //Delete User
+    
+    app.route('/users/update/:id')
+        .post(mainController.EditUser);       //Edit User
 
     app.route('/register')
         .get(registerController.getRegisterPage)
@@ -56,7 +59,7 @@ module.exports = function (app) {
         res.render('edit', { title: 'Admin' });
     });
 
-    app.get('/admin/accounts', checkAdmin, requireAuth, checkUser, function (req, res) {
+    app.get('/accounts', checkAdmin, requireAuth, checkUser, function (req, res) {
         res.render('accounts', { title: 'Admin' });
     });
 

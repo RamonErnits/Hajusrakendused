@@ -3,7 +3,7 @@
 
 <head>
   <title>Edit Cars</title>
-  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,56 +13,67 @@
 
 <body>
   <div id="app">
+    <%- include('partials/navbar') %>
+    <div class="container">
 
-    <br />
+      <table id="carsTable" class="EditTable table-bordered table-hover ">
+        <tr>
+          <th>Car brand </th>
+          <th>Car model </th>
+          <th>Car price </th>
+          <th>Car year </th>
+          <th>Actions</th>
+        </tr>
+        <tr v-for="car in cars">
+          <td>
+            <div class="main-div">
+              <div class="mb-5 form-floating controls pb" id="second-div"><input class="edit-input shadow-lg" id="input-delete"
+                  :form="`update${car._id}`" :value="car.brand" type="name" name="brand" required style="width: 306px;">
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="main-div">
+              <div class="mb-5 form-floating controls pb" id="second-div"><input class="edit-input shadow-lg" id="input-delete"
+                  :form="`update${car._id}`" :value="car.model" type="name" name="model" required style="width: 306px;">
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="main-div">
+              <div class="mb-5 form-floating controls pb" id="second-div"><input class="edit-input shadow-lg" id="input-delete"
+                  :form="`update${car._id}`" :value="car.price" type="name" name="price" required style="width: 306px;">
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="main-div">
+              <div class="mb-5 form-floating controls pb" id="second-div"><input class="edit-input shadow-lg" id="input-delete"
+                  :form="`update${car._id}`" :value="car.year" type="name" name="year" required style="width: 306px;">
+              </div>
+            </div>
+          </td>
+  
+  
+          <td>
+            <div class="main-div">
+              <div id="success"></div>
+              <form :action="`cars/update/${car._id}`" method="POST" :id="`update${car._id}`">
+                <button class="btn btn-primary mt-2" id="sendMessageButton" type="submit" style="width: 306px;">Update</button>
+              </form>
+              <div class="main-div">
+                <!-- <form :action="`cars/update/${car._id}`" method="DELETE">  -->
+                <button class="btn btn-danger mt-2" style="width: 100%;" @click="confirmDeleteCar(car._id)" type="submit">Delete</button>
+                <!-- </form>    -->
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-    <table id="carsTable" class="carsShow table-bordered table-hover ">
-      <tr>
-        <th>Car brand </th>
-        <th>Car model </th>
-        <th>Car price </th>
-        <th>Car year </th>
-        <th>Actions</th>
-      </tr>
-      <tr v-for="car in cars">
-        <td>
-          <div class="main-div">
-            <div class="mb-5 form-floating controls pb" id="second-div"><input class="shadow-lg" id="input-delete"
-                :form="`update${car._id}`" :value="car.brand" type="name" name="brand" required style="width: 306px;">
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="main-div">
-            <div class="mb-5 form-floating controls pb" id="second-div"><input class="shadow-lg" id="input-delete"
-                :form="`update${car._id}`" :value="car.model" type="name" name="model" required style="width: 306px;">
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="main-div">
-            <div class="mb-5 form-floating controls pb" id="second-div"><input class="shadow-lg" id="input-delete"
-                :form="`update${car._id}`" :value="car.price" type="name" name="price" required style="width: 306px;">
-            </div>
-          </div>
-        </td>
-        <td>
-          <div class="main-div">
-            <div class="mb-5 form-floating controls pb" id="second-div"><input class="shadow-lg" id="input-delete"
-                :form="`update${car._id}`" :value="car.year" type="name" name="year" required style="width: 306px;">
-            </div>
-          </div>
-        </td>
+    </div>
 
-
-        <td>
-          <div id="success"></div>
-          <form :action="`cars/update/${car._id}`" method="POST" :id="`update${car._id}`">
-            <button class="btn btn-primary " id="sendMessageButton" type="submit" style="width: 306px;">Update</button>
-          </form>
-        </td>
-      </tr>
-    </table>
+    
   </div>
 
 
@@ -72,24 +83,17 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-  <!-- JavaScript Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-    crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-    crossorigin="anonymous"></script>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 
   <script type="module">
     import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
     createApp({
       data() {
         return {
           carInModal: {},
-          cars: []
+          cars: [],
         }
       },
       async created() {
@@ -100,26 +104,41 @@
         getcar: async function (id) {
           this.carInModal = await (await fetch(`http://localhost:3000/cars/${id}`)).json()
           console.log(this.carInModal);
+          console.log('getting car with id: ' + id)
           const carInfoModal = new bootstrap.Modal(document.getElementById('carInfoModal'), {})
           carInfoModal.show()
-        }
-      },
-      editCar: async function (id) {
+        },
+        deleteItem: async function (car) {
+          let requestOptions = {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+          }
 
+          const response = await fetch("/delete/:id", requestOptions); // <----- HERE! 
+          if (response.status != 204) {
+            throw Error("Cannot delete your item from list");
+          }
+          return car;
+        },
+        confirmDeleteCar: async function (id) {
+
+          var shouldDelete = confirm("Are you sure you want to delete this item?");
+          if (shouldDelete) {
+            console.log(id + " deleted");
+            await (await fetch(`http://localhost:3000/cars/${id}`,{
+              method:'delete',
+            }));
+          
+
+            this.cars = this.cars.filter((car) => car._id != id);
+          }
+        }
+        
 
       }
     }).mount('#app')
-    // display the nuber of rows in the table
-    var table = document.getElementById('carsTable'), rIndex;
-    for (var i = 1; i < table.rows.length; i++) {
-      table.rows[i].cells[0].onclick = function () {
-        rIndex = this.parentElement.rowIndex;
-        document.getElementById("carname").value = this.parentElement.cells[0].innerHTML;
-        document.getElementById("price").value = this.parentElement.cells[1].innerHTML;
-        document.getElementById("seller").value = this.parentElement.cells[2].innerHTML;
-        document.getElementById("location").value = this.parentElement.cells[3].innerHTML;
-      };
-    }
+
+   
   </script>
 
 </body>
